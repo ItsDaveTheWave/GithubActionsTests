@@ -24,3 +24,10 @@ jobs:
       - name: goodbye world
         run: echo "Goodbye World"
         shell: bash
+        
+  createFile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: create file
+        run: touch emptyFile.txt
+        shell: bash
