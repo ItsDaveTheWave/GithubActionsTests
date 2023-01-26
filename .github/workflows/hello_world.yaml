@@ -4,30 +4,25 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      -main
   workflow_dispatch:
 
 jobs:
   hello:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
       - name: hello world
         run: echo "Hello World"
         shell: bash
 
-  goodbye:
+  report:
     runs-on: ubuntu-latest
     steps:
-      - name: goodbye world
-        run: echo "Goodbye World"
-        shell: bash
-        
-  createFile:
-    runs-on: ubuntu-latest
-    steps:
-      - name: create file
-        run: touch emptyFile.txt
-        shell: bash
+      - uses: actions/checkout@v2
+      - name: Create report file
+        run: date +%s > report.txt
+      - name: Commit report
+        run: |
+          git config --global user.name 'ItsDaveTheWave'
+          git config --global user.email 'itsdavidch@gmail.com'
+          git commit -am "Automated report"
+          git push
